@@ -1,54 +1,96 @@
-import sys
+import random
+import time
+import matplotlib.pyplot as plt
+random.seed(5040)
 
 
-def main():
-    a = [l for l in sys.stdin.readline().strip()]
-    b = [l for l in sys.stdin.readline().strip()]
+def create(n):
+  fin_ar = [random.randint(1, 10000) for y in range(n)]
+  print(fin_ar)
+  with open(str(n) + 'k.txt', 'w') as f:
+    print('generating file for ', str(n // 1000), 'k\n')
+    for a in fin_ar:
+      f.write(str(a) + '\n')
+  return fin_ar
 
-    a = [l for l in a if l in b]
-    b = [l for l in b if l in a]
-
-
-    print((lcs(a, b)))
-
-
-def lcs(a, b):
-    lengths = [[0 for j in range(len(b) + 1)] for i in range(len(a) + 1)]
-    # row 0 and column 0 are initialized to 0 already
-    print(lengths)
-    print(list(enumerate(a)))
-    print(list(enumerate(b)))
-    ## the first palce are ignored thats why we use i+1 and j+1 making the position one step ahead,,,
-    ### also the reason we used the (len(a)+1) up for lengths()......
-    
-    for i, x in enumerate(a):
-        for j, y in enumerate(b):
-            if x == y:
-                lengths[i + 1][j + 1] = lengths[i][j] + 1
-            else:
-                lengths[i + 1][j + 1] = \
-                    max(lengths[i + 1][j], lengths[i][j + 1])
-    m=len(a)
-    n=len(b)
-    print(lengths)
-    ### see the difference.......
-    ## tha main difference is about the if i==0 or j==0 conditon.....
-    ###.................
-    # for i in range(m + 1):
-    #     for j in range(n + 1):
-    #         if i == 0 or j == 0:
-    #             a[i][j] = 0
-    #         elif a[i - 1] == b[j - 1]:
-    #             lengths[i][j] = lengths[i - 1][j - 1] + 1
-    #         else:
-    #             lengths[i][j] = max(lengths[i - 1][j], lengths[i][j - 1])
-    #
-    #
-
-    result = lengths[-1][-1]
-
-    return result
+def bubbleSort(final_arr):
+  aa = time.perf_counter()
+  arr = final_arr
+  n = len(arr)
+  cn = 0
+  for i in range(n):
+    cn += 1
+    for j in range(0, n - i - 1):
+      cn += 1
+      if arr[j] > arr[j + 1]:
+        arr[j], arr[j + 1] = arr[j + 1], arr[j]
+  bb = time.perf_counter()
+  return (bb - aa)
 
 
-if __name__ == "__main__":
-    main()
+def Csort(final_arr):
+  aa = time.time()
+  myList = final_arr
+  # [int(11* random.random()) for _ in range(x)]
+  # print(myList)
+  maxValue = 0  ## decrease the couonting... dramatically
+  cn = 0
+  for i in range(len(myList)):
+    cn += 1
+    if myList[i] > maxValue:
+      maxValue = myList[i]
+      ''' finding the max....'''
+  # print(maxValue)
+  buckets = [0] * (maxValue + 1)  # empty array...
+
+  for i in myList:
+    buckets[i] += 1  # empty arr+=1
+    cn += 1  # counter...
+  i = 0
+  for j in range(maxValue + 1):
+    cn += 1
+    for a in range(buckets[j]):
+      cn += 1
+      myList[i] = j
+      i += 1
+  bb = time.time()
+
+  return (bb - aa)
+
+
+### dont run....................
+
+
+###########################################################
+##   main section..........
+
+xs = list(range(1000, 11000,1500))
+[create(x) for x in xs ] ## generates .txt file
+## xs contains the list of number of elements in each txt file....
+
+ys1=[]
+ys2=[]
+for x in xs:
+  f=open(str(x)+'k.txt','r')
+  ls=[]
+  ## reads from the .txt file and created  list..>>>
+  ## needs time for operation....
+  for x in f:
+    ls.append(int(x))
+  # print(ls)
+  ys1.append(Csort(ls))
+  ys2.append(bubbleSort(ls))
+
+## platting...................
+plt.figure(1)
+plt.plot(xs, ys1,color='black')
+plt.xlabel('Number of element')
+plt.ylabel('time(s) for sorting')
+
+plt.figure(2)
+plt.plot(xs, ys2,color='red')
+plt.xlabel('Number of element')
+plt.ylabel('time(s) for sorting')
+
+
+plt.show()

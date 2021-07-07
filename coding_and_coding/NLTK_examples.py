@@ -9,22 +9,25 @@ LINES = ['-', '-', '--']  # Line style for plots.
 def main():
     # Load text files into dictionary by author.
     strings_by_author = dict()
-    strings_by_author['doyle'] = text_to_string('hound.txt')
+    strings_by_author['doyle'] = text_to_string('hound.txt') ## reading the text files..
     strings_by_author['wells'] = text_to_string('war.txt')
     strings_by_author['unknown'] = text_to_string('lost.txt')
 
     # Check results of reading files.
-    print(strings_by_author['doyle'][:300])
+    # print(strings_by_author['doyle'][:300])
 
     # Tokenize text strings and run stylometric tests.
     words_by_author = make_word_dict(strings_by_author)
-    len_shortest_corpus = find_shortest_corpus(words_by_author)
 
+    len_shortest_corpus = find_shortest_corpus(words_by_author)
+    print(len_shortest_corpus)
+##   tests...
     word_length_test(words_by_author, len_shortest_corpus)
     stopwords_test(words_by_author, len_shortest_corpus)
     parts_of_speech_test(words_by_author, len_shortest_corpus)
-    vocab_test(words_by_author)
-    jaccard_test(words_by_author, len_shortest_corpus)
+
+    # vocab_test(words_by_author)
+    # jaccard_test(words_by_author, len_shortest_corpus)
 
 
 def text_to_string(filename):
@@ -79,7 +82,8 @@ def stopwords_test(words_by_author, len_shortest_corpus):
     """Plot stopwords freq by author, truncated to shortest corpus length."""
     stopwords_by_author_freq_dist = dict()
     plt.figure(2)
-    stop_words = set(stopwords.words('english'))  # Use set for speed.
+    stop_words = set(stopwords.words('english'))  # Use set for speed... making a list to check
+    # on the 'words_by_author' ....
     # print('Number of stopwords = {}\n'.format(len(stop_words)))
     # print('Stopwords = {}\n'.format(stop_words))
     for i, author in enumerate(words_by_author):
@@ -112,53 +116,53 @@ def parts_of_speech_test(words_by_author, len_shortest_corpus):
     plt.show()
     # Windows PowerShell users may need plt.show(block=True).
 
+#
+# def vocab_test(words_by_author):
+#     """Compare author vocabularies using the Chi Squared statistical test."""
+#     chisquared_by_author = dict()
+#     for author in words_by_author:
+#         if author != 'unknown':
+#             # Combine corpus for author & unknown & find 1000 most-common words.
+#             combined_corpus = (words_by_author[author] +
+#                                words_by_author['unknown'])
+#             author_proportion = (len(words_by_author[author]) /
+#                                  len(combined_corpus))
+#             combined_freq_dist = nltk.FreqDist(combined_corpus)
+#             most_common_words = list(combined_freq_dist.most_common(1000))
+#             chisquared = 0
+#
+#             # Calculate observed vs. expected word counts.
+#             for word, combined_count in most_common_words:
+#                 observed_count_author = words_by_author[author].count(word)
+#                 expected_count_author = combined_count * author_proportion
+#                 chisquared += ((observed_count_author -
+#                                 expected_count_author) ** 2 /
+#                                expected_count_author)
+#                 chisquared_by_author[author] = chisquared
+#             print('Chi-squared for {} = {:.1f}'.format(author, chisquared))
+#
+#     most_likely_author = min(chisquared_by_author, key=chisquared_by_author.get)
+#     print('Most-likely author by vocabulary is {}\n'.format(most_likely_author))
 
-def vocab_test(words_by_author):
-    """Compare author vocabularies using the Chi Squared statistical test."""
-    chisquared_by_author = dict()
-    for author in words_by_author:
-        if author != 'unknown':
-            # Combine corpus for author & unknown & find 1000 most-common words.
-            combined_corpus = (words_by_author[author] +
-                               words_by_author['unknown'])
-            author_proportion = (len(words_by_author[author]) /
-                                 len(combined_corpus))
-            combined_freq_dist = nltk.FreqDist(combined_corpus)
-            most_common_words = list(combined_freq_dist.most_common(1000))
-            chisquared = 0
-
-            # Calculate observed vs. expected word counts.
-            for word, combined_count in most_common_words:
-                observed_count_author = words_by_author[author].count(word)
-                expected_count_author = combined_count * author_proportion
-                chisquared += ((observed_count_author -
-                                expected_count_author) ** 2 /
-                               expected_count_author)
-                chisquared_by_author[author] = chisquared
-            print('Chi-squared for {} = {:.1f}'.format(author, chisquared))
-
-    most_likely_author = min(chisquared_by_author, key=chisquared_by_author.get)
-    print('Most-likely author by vocabulary is {}\n'.format(most_likely_author))
-
-
-def jaccard_test(words_by_author, len_shortest_corpus):
-    """Calculate Jaccard similarity of each known corpus to unknown corpus."""
-    jaccard_by_author = dict()
-    unique_words_unknown = set(words_by_author['unknown']
-                               [:len_shortest_corpus])
-    authors = (author for author in words_by_author if author != 'unknown')
-    for author in authors:
-        unique_words_author = set(words_by_author[author][:len_shortest_corpus])
-        shared_words = unique_words_author.intersection(unique_words_unknown)
-        jaccard_sim = (float(len(shared_words)) / (len(unique_words_author) +
-                                                   len(unique_words_unknown) -
-                                                   len(shared_words)))
-        jaccard_by_author[author] = jaccard_sim
-        print('Jaccard Similarity for {} = {}'.format(author, jaccard_sim))
-
-    most_likely_author = max(jaccard_by_author, key=jaccard_by_author.get)
-    print('Most-likely author by similarity is {}'.format(most_likely_author))
-
+#
+# def jaccard_test(words_by_author, len_shortest_corpus):
+#     """Calculate Jaccard similarity of each known corpus to unknown corpus."""
+#     jaccard_by_author = dict()
+#     unique_words_unknown = set(words_by_author['unknown']
+#                                [:len_shortest_corpus])
+#     authors = (author for author in words_by_author if author != 'unknown')
+#     for author in authors:
+#         unique_words_author = set(words_by_author[author][:len_shortest_corpus])
+#         shared_words = unique_words_author.intersection(unique_words_unknown)
+#         jaccard_sim = (float(len(shared_words)) / (len(unique_words_author) +
+#                                                    len(unique_words_unknown) -
+#                                                    len(shared_words)))
+#         jaccard_by_author[author] = jaccard_sim
+#         print('Jaccard Similarity for {} = {}'.format(author, jaccard_sim))
+#
+#     most_likely_author = max(jaccard_by_author, key=jaccard_by_author.get)
+#     print('Most-likely author by similarity is {}'.format(most_likely_author))
+#
 
 if __name__ == '__main__':
     main()
