@@ -16,11 +16,9 @@ n, d = map(int, input().split())
 #a= [2, 3, 4, 2, 3, 6, 8, 4, 5]
 a= list(map(int,input().split()))
 
-
 cnt=0
 cn=0
 aa=sorted(a[:d])
-
 
 for x in range(n-d):
     dd=retmd(aa)

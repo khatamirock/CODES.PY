@@ -4,7 +4,7 @@ st=[]
 def mover(step,r,l):
 
     global st
-    st.append(step)
+    st.append(step)  ### appending ,,,,,,,,,,,,,,,,,,
     print(st, end=' \n')
 
     if r<rt:
@@ -15,7 +15,7 @@ def mover(step,r,l):
         # st.pop()
         print('|',st[-1],'|\n')
 
-    st.pop()
+    st.pop() ##### popping thats...... this is backTrack....
 str=''
 mover('',0,0)
 
