@@ -14,7 +14,7 @@ def stairs(n):
 
 
 
-''' pronlem the same ideology as the starWay problem '''
+''' problem the same ideology as the starWay problem '''
 #########   Domino arrangements
 
 def arrange(n):

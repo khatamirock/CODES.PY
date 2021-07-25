@@ -1,5 +1,5 @@
 
-words = ["a","b","ba","bca","bda","bdca"]
+words = ["bdca","a","b","bca","ba","bda",]
 
 
 st=set(words)
@@ -11,7 +11,7 @@ def ret(w):
         return d[w]
     else:
         mx=0
-        ln=len(w)
+        ln=len(w)   ### similar to the RodCutter.................
         for x in range(ln):
             mx=max(mx,ret(w[:x]+w[x+1:])+1)
         d[w]=mx
@@ -20,9 +20,3 @@ def ret(w):
 
 
 
-
-for wr in words:
-    # if len(wr)!=1:
-        ret(wr)
-
-print( max(d.values()))

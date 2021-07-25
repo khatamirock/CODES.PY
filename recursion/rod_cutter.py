@@ -12,7 +12,7 @@ def max(a, b):
 def cutRod(price, n):
     if (n <= 0):
         return 0
-    max_val = -sys.maxsize - 1
+    max_val = -sys.maxsize - 1 ### similar to the longestString_Chain..................
     for i in range(0, n):
         max_val = max(max_val, price[i] + cutRod(price, n - i - 1))
     return max_val
@@ -23,7 +23,7 @@ size = len(arr)
 print("Maximum Obtainable Value is", cutRod(arr, size))
 
 
-
+''' almost same as stairWay problem.... (not fully)..'''
 # my implement..........  FASTER>>>>>>>>>>>>>>>>>>>>
 ###
 '''  see drive DYNAMIC PROGRAMMING-I for more visual.....
@@ -39,10 +39,37 @@ def cutter(currN):
             curVal=max(curVal, prc[x]+go)
             remem[currN-x-1]=go
         else:
-            curVal=max(curVal,prc[x]+remem[currN-x-1])
+            curVal=max(curVal,prc[x]+remem[currN-x-1]) ### the longString version is 
+                                    1(the value initailly(if mentioned.) + rec()...
     return curVal
-
 
 print(cutter(len(prc)))
 
 '''
+
+
+## more Older version>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+'''
+
+prc= [1, 5, 8, 9, 10, 17, 17, 20]
+
+ar=[1,5,6,7,8]
+
+
+def cutter(currN):
+    if currN<=0:
+        return 0
+    curVal=0
+    for x in range(currN):
+        curVal=max( curVal, prc[x]+cutter(currN-x-1) )
+    return curVal
+
+print(cutter(len(prc)))
+
+
+
+
+
+'''
+
