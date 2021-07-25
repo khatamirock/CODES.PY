@@ -14,7 +14,8 @@ def hlp(ind):
         return 0
     if ind in rem:
         return rem[ind]
-    mini=999999999
+    mini = 999999999  ######## like RodCutter problem..>>>>>>>>>>>
+    #### but here we will traverse all the possobility and find the min Val...
     for i in range(ind+1,ind+nums[ind]+1):
         l=hlp(i)
         mini=min(mini,1+l)
