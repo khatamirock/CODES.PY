@@ -37,13 +37,15 @@ def Csort(final_arr):
   ''' end.....'''
   i = 0
   for j in range(maxValue + 1):
+    if buckets[j]==1:
+      myList[i]=j
+      i+=1
+    # for a in range(buckets[j]):
+    #   cn += 1
+    #   myList[i] = j
+    #   i += 1
 
-    for a in range(buckets[j]):
-      cn += 1
-      myList[i] = j
-      i += 1
-
-arr = [170, 45, 75, 90, 802, 24, 2, 66]
+arr = [17, 45, 35, 19, 40, 24, 2, 60]
 
 # Function Call
 Csort(arr)

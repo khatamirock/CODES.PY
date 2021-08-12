@@ -23,6 +23,9 @@ def knapSack(W, wt, val, n):
 # end of function knapSack
 
 # To test above function
+xx=list(map(int,input('Weight').split()))
+
+print(xx)
 val = [60, 100, 120]
 wt = [10, 20, 30]
 W = 50

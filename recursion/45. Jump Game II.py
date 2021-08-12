@@ -16,6 +16,7 @@ def hlp(ind):
         return rem[ind]
     mini = 999999999  ######## like RodCutter problem..>>>>>>>>>>>
     #### but here we will traverse all the possobility and find the min Val...
+    ''' also like the LongestString-chain er moto..... see that...'''
     for i in range(ind+1,ind+nums[ind]+1):
         l=hlp(i)
         mini=min(mini,1+l)
