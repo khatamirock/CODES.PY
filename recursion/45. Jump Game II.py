@@ -1,6 +1,6 @@
 
 
-
+# Jump Game II | Naresh Gupta ''' youtube'''
 
 # nums =[1,2,3]
 nums=[5,4,3,2,10,1,4]
