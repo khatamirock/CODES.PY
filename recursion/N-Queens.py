@@ -1,3 +1,6 @@
+# N-Queens - Backtracking - Leetcode 51 - Python
+# NeetCode
+
 from typing import List
 
 
