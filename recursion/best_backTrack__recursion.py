@@ -16,7 +16,8 @@ def mover(step,r,l):
         print('|',st[-1],'|\n')
 
     ''' after all we need to retreat to the previous step...... '''
-    st.pop() ##### popping thats...... this is backTrack....
+    st.pop() ##### popping thats...... this is backTrack.... kaz ses e pop kora lagbee
+    ###       thats the main purpose
 str=''
 
 
