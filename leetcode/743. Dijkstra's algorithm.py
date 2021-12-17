@@ -1,14 +1,13 @@
 ## https://www.youtube.com/watch?v=EaphyqKU4PQ
 ## channel neetcode>>>>>>>>>>>>>>>>>
 '''best............'''
+
 import heapq
 import collections
-# a=[[0,1,4],[1,3,1],[3,5,4],[0,2,2],[2,4,5],[4,5,10],[2,3,6]]
-
-
-a=[[1,2,5],[3,2,8]]
+a=[[0,1,4],[1,3,1],[3,5,4],[0,2,2],[2,4,5],[4,5,10],[2,3,6]]
+# a=[[1,2,5],[3,2,8]]
 edges=collections.defaultdict(list)
-
+collections.defaultdict(list)
 ## this is actually a variant of BFS ||||||||||||
 
 for x,y,z in a:
@@ -17,7 +16,7 @@ for x,y,z in a:
 k=a[0][0]
 print(k)
 
-nHeap=[(0,k)]
+nHeap=[(0,0)]
 visited=set()
 t=0
 while nHeap:

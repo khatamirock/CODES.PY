@@ -1,86 +1,96 @@
-# Python3 implementation of the approach
 
 
-def dpt():
-    return (input().split())
+import collections
+import time
+import random
+
+l,u=0,150
+wgtOption=[1,2,3,4,6,7,8,10]
+def adjListGEN(u):
+  adj2=[]
+  l=0
+  for x in range(u):
+
+    chs=(random.randint(l,u))
+    chs2=(random.randint(l,u))
+    inc=random.choice(wgtOption)
+    adj2.append([chs,chs2,inc])
+  return adj2
 
 
+zONe=[0,0,1,0,1]
+def matrixGEN(u):
+  adj2=[]
+  for x in range(u):
+    ap=[]
+    for y in range(u):
+      inc=random.choice( zONe)
+      if inc==1:
+        ap.append(random.choice(wgtOption))
+      else:
+        ap.append(0)
+    adj2.append(ap)
+  return adj2
+    # print([chs,chs2])
 
-sa=[]
 
-for x in range(4):
-    sa.append (list(map(int,dpt())))
-print(sa)
-
-
-
-class Graph:
+def mrxCONV(matrix):
     adj = []
-
-    def __init__(self, v, e):
-
-        self.v = v
-        self.e = e
-        self.adj=sa
-        # Graph.adj = [[0 for i in range(v)]
-        #              for j in range(v)]
+    for i,row in enumerate(matrix):
+        for j,col in enumerate(row):
+            if col!=0:
+                adj.append( [i,j,col] )
+    return adj
 
 
-    def addEdge(self, start, e):
+## this is actually a variant of BFS |||||||||||| implemented by that.............
+def byUnsArr(a,tm):
+    s=time.perf_counter()
+    edges=collections.defaultdict(list)
 
-        self.adj[start][e] = 1
-        self.adj[e][start] = 1
+    for x,y,z in a:
+        edges[x].append((y,z))
 
-    def BFS(self, start):
-
-        visited = [False] * self.v
-        q = [start]
-
-        visited[start] = True
-
-        while q:
-            vis = q[0]
-
-            # Print current node
-            print(vis, end=' ')
-            q.pop(0)
-
-            # For every adjacent vertex to
-            # the current vertex
-            for i in range(self.v):
-                if (self.adj[vis][i] == 1 and  (not visited[i])):
-                    # Push the adjacent node
-                    # in the queue
-                    q.append(i)
-
-                    # set
-                    visited[i] = True
+    k=a[0][0]
 
 
-# Driver code
-v, e = 4, 4
+    unsortedList=[(0,0)]
+    visited=set()
+    t=0
+    while unsortedList:
+        w1,n1=unsortedList.pop()
+        if n1 in visited:
+            continue
+        visited.add(n1)
+        t=max(t,w1)
 
-# Create the graph
-# G = Graph(v, e)
-# G.addEdge(0, 1)
-# G.addEdge(0, 2)
-# G.addEdge(1, 3)
-#
-#
-# G.adj=[y for y in [x for x in range()]]
+        for n2,w2 in edges[n1]:
+            if n2 not in visited:
+                # heapq.heappush(unsortedList,(w1+w2,n2))
+                unsortedList.append((w1+w2,n2))
 
+        unsortedList.sort(reverse=True,key=lambda x:x[0])
+        ### sorting cause the list is unsorted .. needs constant sorting
+        ### also in worst case the complexity is O(log.n)
+        ## gonna be much more faster after the 1st sort.. if
+    # print(len(visited))
 
-# Perform BFS
-st=int(input('enter starting vertice'))
-
-for i,x in enumerate(sa[st-1]):
-    if x==1:
-        print(i+1)
+    ss = time.perf_counter()
+    ss-=s
+    return  (ss+tm)*1000
 
 
 
 
+tm1=time.perf_counter()
+gen=matrixGEN(100)
+tm2=time.perf_counter()-tm1
+
+arr=mrxCONV(gen)
+
+print('for MATRX',byUnsArr(arr,tm2))
 
 
+print('for ADJ list',byUnsArr(  arr ,0),'\n\n\n')
 
-# This code is contributed by ng24_7
+

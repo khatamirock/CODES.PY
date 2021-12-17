@@ -1,39 +1,53 @@
+matrix=[[0, 4, 0, 0, 0, 0, 0, 8],
+ [4, 0, 8, 0, 0, 0, 0, 11],
+ [0, 8, 0, 7, 0, 4, 0, 0],
+ [0, 0, 7, 0, 9, 14, 0, 0],
+ [0, 0, 0, 9, 0, 10, 0, 0],
+ [0, 0, 4, 14, 10, 0, 2, 0],
+ [0, 0, 0, 0, 0, 2, 0, 1],
+ [8, 11, 0, 0, 0, 0, 1, 0],
 
-dep=6
-a=['0{}1','2']
-sa='0{}1'
-p=0
-import  random
-random.seed(438)
+ ]
 
-for x in range(10):
-    print(random.choice(a))
-def al(a,d):
-    if d<dep:
-        print(a.format('0a1'))
-        al(a.format('0{}1'),d+1)
-    else:
-        print((a.format('')))
 
-# al('0{}1',0)
-
-# for two parameters or you can say
-def aa(x,d):
-    print(x)
-
-    if d<dep:
-        a('0a1',d)
-
-    a('2',d)
-
-    pass
+ar=[[0 ,2]
+[0,4],
+[0,5],
+[1,4],
+[1,5],
+[2,3],
+[2,4],
+[4,5]]
 
 
 
 
 
 
-# for x in range(6):
-#     sa =sa.format('0{}1')
-#     print(sa.format('0a1'))
-# # print(a[p].format(a[1]),'>>>>>')
+
+
+
+
+
+
+
+
+
+#
+# def mrxCONV(matrix):
+#     adj = []
+#     for i,row in enumerate(matrix):
+#         ap=[]
+#         for j,col in enumerate(row):
+#
+#             if col!=0:
+#                 adj.append( [i,j,col] )
+#
+#         # adj.append(ap)
+#     return adj
+#
+#
+#
+# print(mrxCONV(matrix))
+
+

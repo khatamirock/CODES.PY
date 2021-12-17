@@ -11,6 +11,7 @@ res = []
 n = 4
 board = [['*'] * n for _ in range(n)]
 
+
 def bp():
     for x in board:
         print(x)
